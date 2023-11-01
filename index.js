@@ -23,3 +23,17 @@ new studmodel(request.body).save();
 response.send("Record saved")
 
 })
+app.get('/view',async(request,response)=>{
+    var data = await studmodel.find();
+    response.send(data)
+})
+app.delete('/remove/:id',async(request,response)=>{
+    let id=request.params.id
+    await studmodel.findByIdAndDelete(id)
+    response.send("Record deleted")
+})
+app.put('/edit/:id',async(request,response)=>{
+    let id=request.params.id
+    await studmodel.findByIdAndUpdate(id,request.body)
+    response.send("Record Updated")
+})
